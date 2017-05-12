@@ -172,7 +172,7 @@ class Environment(object):
 
 
 class MyIndividual(Individual):
-    alleles = [(550, 550), (250, 250), (20, 30), (20, 30), (5, 10), (pi/60, pi/10), (pi/60, pi/10), (pi/60, pi/10), (pi/60, pi/10)]
+    alleles = [(550, 550), (250, 250), (30, 50), (30, 50), (5, 10), (pi/60, pi/10), (pi/60, pi/10), (pi/60, pi/10), (pi/60, pi/10)]
     length = 9
 
     """
@@ -209,7 +209,7 @@ class MyIndividual(Individual):
 
         dist = sqrt(pos[0]**2 + pos[1]**2)
 
-        score = dist + sqrt(iterations)
+        score = dist #+ sqrt(iterations)
 
         self.score = score
 
@@ -224,7 +224,7 @@ class MyIndividual(Individual):
                 chromosome_str, self.score)
 
 
-e = Environment(MyIndividual, maxgenerations=50, mutation_rate=0.04)
+e = Environment(MyIndividual, maxgenerations=300, mutation_rate=0.04)
 
 e.run()
 

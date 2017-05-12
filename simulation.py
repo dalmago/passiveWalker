@@ -14,7 +14,7 @@ from walker import walker
 
 class Simulation():
         def __init__(self, scr_w = 600, scr_h = 600, \
-                        angle=pi/10, gravity=200, \
+                        angle=pi/20, gravity=200, \
                         show=True):
                 # Window size
                 self.scr_w = scr_w
