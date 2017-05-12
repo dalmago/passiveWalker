@@ -102,8 +102,11 @@ class Environment(object):
         return [self.kind() for individual in range(self.size)]
     
     def run(self):
-        while not self._goal():
-            self.step()
+        try:
+            while not self._goal():
+                self.step()
+        except KeyboardInterrupt:
+            pass
 
         best = self.best.copy()
 
@@ -172,7 +175,7 @@ class Environment(object):
 
 
 class MyIndividual(Individual):
-    alleles = [(550, 550), (250, 260), (10, 60), (10, 60), (5, 20), (0, pi/2), (0, pi/2), (0, pi/2), (0, pi/2)]
+    alleles = [(550, 550), (245, 255), (20, 40), (5, 20), (10, 30), (0, pi/2), (0, pi/2), (0, pi/2), (0, pi/2)]
     length = 9
 
     """
@@ -207,7 +210,9 @@ class MyIndividual(Individual):
         iterations, pos, ke = s.mySimul((self.chromosome[0], self.chromosome[1]), self.chromosome[2], self.chromosome[3],
                   self.chromosome[4], self.chromosome[5], self.chromosome[6], self.chromosome[7], self.chromosome[8])
 
-        dist = sqrt(pos[0]**2 + pos[1]**2)
+        #dist = sqrt(pos[0]**2 + pos[1]**2)
+
+        dist = pos[0]
 
         score = (600-dist)/6 # 0 - 100
 
@@ -226,7 +231,7 @@ class MyIndividual(Individual):
                 chromosome_str, self.score)
 
 
-e = Environment(MyIndividual, maxgenerations=200, mutation_rate=0.04, optimum=95)
+e = Environment(MyIndividual, maxgenerations=50, mutation_rate=0.04, optimum=100)
 
 e.run()
 

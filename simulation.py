@@ -93,7 +93,5 @@ class Simulation():
 
                 ke = self.get_ke()
                 ke_sum += ke
-                if ke < 5000 or iterations > 1500:
+                if ke < 5000 or iterations > 2500:
                     return iterations, self.space.bodies[1].position, ke_sum
-
-
