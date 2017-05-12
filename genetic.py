@@ -109,16 +109,16 @@ class Environment(object):
 
         s = Simulation()
         while True:
-            s.mySimul((best.chromosome[0], best.chromosome[1]), best.chromosome[2], best.chromosome[3],
-                      best.chromosome[4], best.chromosome[5], best.chromosome[6], best.chromosome[7], best.chromosome[8])
+            print(s.mySimul((best.chromosome[0], best.chromosome[1]), best.chromosome[2], best.chromosome[3],
+                      best.chromosome[4], best.chromosome[5], best.chromosome[6], best.chromosome[7], best.chromosome[8]))
 
     
     def _goal(self):
         return self.generation >= self.maxgenerations or \
-               self.best.score == self.optimum
+               self.best.score >= self.optimum
     
     def step(self):
-        self.population.sort(key=lambda indiv: indiv.score)
+        self.population.sort(key=lambda indiv: indiv.score, reverse=True)
         self._crossover()
         self.generation += 1
         self.report()
@@ -152,7 +152,7 @@ class Environment(object):
     #
     def _tournament(self, size=8, choosebest=0.90):
         competitors = [random.choice(self.population) for i in range(size)]
-        competitors.sort(key=lambda indiv: indiv.score)
+        competitors.sort(key=lambda indiv: indiv.score, reverse=True)
         if random.random() < choosebest:
             return competitors[0]
         else:
@@ -172,7 +172,7 @@ class Environment(object):
 
 
 class MyIndividual(Individual):
-    alleles = [(550, 550), (250, 250), (30, 50), (30, 50), (5, 10), (pi/60, pi/10), (pi/60, pi/10), (pi/60, pi/10), (pi/60, pi/10)]
+    alleles = [(550, 550), (250, 260), (10, 60), (10, 60), (5, 20), (0, pi/2), (0, pi/2), (0, pi/2), (0, pi/2)]
     length = 9
 
     """
@@ -204,12 +204,14 @@ class MyIndividual(Individual):
 
         s = Simulation(show=False)
 
-        iterations, pos = s.mySimul((self.chromosome[0], self.chromosome[1]), self.chromosome[2], self.chromosome[3],
+        iterations, pos, ke = s.mySimul((self.chromosome[0], self.chromosome[1]), self.chromosome[2], self.chromosome[3],
                   self.chromosome[4], self.chromosome[5], self.chromosome[6], self.chromosome[7], self.chromosome[8])
 
         dist = sqrt(pos[0]**2 + pos[1]**2)
 
-        score = dist #+ sqrt(iterations)
+        score = (600-dist)/6 # 0 - 100
+
+        # score = ke**2 + iterations - dist**3
 
         self.score = score
 
@@ -224,7 +226,7 @@ class MyIndividual(Individual):
                 chromosome_str, self.score)
 
 
-e = Environment(MyIndividual, maxgenerations=300, mutation_rate=0.04)
+e = Environment(MyIndividual, maxgenerations=200, mutation_rate=0.04, optimum=95)
 
 e.run()
 

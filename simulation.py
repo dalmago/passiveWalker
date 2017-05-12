@@ -14,7 +14,7 @@ from walker import walker
 
 class Simulation():
         def __init__(self, scr_w = 600, scr_h = 600, \
-                        angle=pi/20, gravity=200, \
+                        angle=pi/15, gravity=200, \
                         show=True):
                 # Window size
                 self.scr_w = scr_w
@@ -86,15 +86,14 @@ class Simulation():
                            pos, ul, ll, w, lua, lla, rua, rla)
 
             iterations = 0
+            ke_sum = 0
             while True:
                 self.step(0.02)
                 iterations += 1
 
-                if self.get_ke() < 20:
-                    return iterations, self.space.bodies[1].position
+                ke = self.get_ke()
+                ke_sum += ke
+                if ke < 5000 or iterations > 1500:
+                    return iterations, self.space.bodies[1].position, ke_sum
 
-
-if __name__ == '__main__':
-    s = Simulation()
-    s.mySimul()
 
