@@ -175,7 +175,7 @@ class Environment(object):
 
 
 class MyIndividual(Individual):
-    alleles = [(500, 550), (230, 300), (20, 40), (5, 20), (10, 30), (0, pi/2), (0, pi/2), (0, pi/2), (0, pi/2)]
+    alleles = [(500, 600), (230, 350), (20, 40), (5, 20), (10, 30), (0, pi/2), (0, pi/2), (0, pi/2), (0, pi/2)]
     length = 9
 
     """
@@ -231,7 +231,7 @@ class MyIndividual(Individual):
                 chromosome_str, self.score)
 
 
-e = Environment(MyIndividual, maxgenerations=50, mutation_rate=0.04, optimum=100)
+e = Environment(MyIndividual, maxgenerations=200, mutation_rate=0.04, optimum=100)
 
 e.run()
 
