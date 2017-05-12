@@ -175,7 +175,7 @@ class Environment(object):
 
 
 class MyIndividual(Individual):
-    alleles = [(500, 600), (230, 350), (20, 40), (5, 20), (10, 30), (0, pi/2), (0, pi/2), (0, pi/2), (0, pi/2)]
+    alleles = [(500, 600), (230, 350), (20, 80), (5, 40), (10, 45), (0, pi/2), (0, pi/2), (0, pi/2), (0, pi/2)]
     length = 9
 
     """
