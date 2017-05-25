@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 
 import pymunk
 import pymunk.util
@@ -87,4 +87,3 @@ class walker():
         # Add the body and shape to the space
         self.space.add(leg, body)
         return leg
-

@@ -1,4 +1,4 @@
-#!/usr/bin/env python4
+#!/usr/bin/env python3
 
 import pygame
 from pygame.locals import *
@@ -14,7 +14,7 @@ from walker import walker
 
 class Simulation():
         def __init__(self, scr_w = 600, scr_h = 600, \
-                        angle=pi/15, gravity=200, \
+                        angle=pi/30, gravity=200, \
                         show=True):
                 # Window size
                 self.scr_w = scr_w
@@ -30,7 +30,7 @@ class Simulation():
                 # Create the space
                 self.space = pymunk.Space()
                 self.space.gravity = (0, -gravity)
-                # Create the floor 
+                # Create the floor
                 self._create_floor(angle)
         def _create_floor(self, angle):
                 # Create the floor
@@ -80,10 +80,9 @@ class Simulation():
                         k += body.kinetic_energy
                 return k
 
-        def mySimul(self, pos, ul, ll, w, lua, lla, rua, rla):
+        def mySimul(self, args):
 
-            robot = walker(self.space,
-                           pos, ul, ll, w, lua, lla, rua, rla)
+            robot = walker(self.space, *args)
 
             iterations = 0
             ke_sum = 0
@@ -93,5 +92,5 @@ class Simulation():
 
                 ke = self.get_ke()
                 ke_sum += ke
-                if ke < 5000 or iterations > 2500:
+                if ke < 2000 or iterations > 5000:
                     return iterations, self.space.bodies[1].position, ke_sum
