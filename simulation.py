@@ -93,5 +93,5 @@ class Simulation():
                 ke = self.get_ke()
                 ke_sum += ke
 
-                if ke < 2000 or iterations > 5000 or self.space.bodies[0].position[0] < -50:
-                    return iterations, self.space.bodies[0].position, ke_sum
+                if ke < 2000 or iterations > 8000 or robot.lul.body.position[0] < -50:
+                    return iterations, robot.lul.body.position, ke_sum

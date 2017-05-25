@@ -111,7 +111,7 @@ class Environment(object):
 
         best = self.best.copy()
 
-        s = Simulation()
+        s = Simulation(show=True)
         while True:
             print(s.mySimul([(best.chromosome[0], best.chromosome[1]), best.chromosome[2], best.chromosome[3],
                       best.chromosome[4], best.chromosome[5], best.chromosome[6], best.chromosome[7], best.chromosome[8]]))
@@ -176,8 +176,7 @@ class Environment(object):
 
 
 class MyIndividual(Individual):
-    # 500 595 230 350
-    alleles = [(550, 570), (275, 290), (20, 80), (10, 80), (10, 30), (0, pi/2), (0, pi/2), (0, pi/2), (0, pi/2)]
+    alleles = [(550, 570), (270, 290), (20, 80), (10, 80), (10, 30), (0, pi/2), (0, pi/2), (0, pi/2), (0, pi/2)]
     length = 9
 
     """
@@ -218,7 +217,7 @@ class MyIndividual(Individual):
 
         score = (600-dist)/6 # 0 - 100
 
-        # score = ke**2 + iterations - dist**3
+        # score = sqrt(ke) + sqrt(iterations) + score**2
 
         self.score = score
 
@@ -233,6 +232,6 @@ class MyIndividual(Individual):
                 chromosome_str, self.score)
 
 
-e = Environment(MyIndividual, maxgenerations=100, mutation_rate=0.04, optimum=100)
+e = Environment(MyIndividual, maxgenerations=300, mutation_rate=0.05, optimum=100)
 
 e.run()
