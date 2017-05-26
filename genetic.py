@@ -232,6 +232,6 @@ class MyIndividual(Individual):
                 chromosome_str, self.score)
 
 
-e = Environment(MyIndividual, maxgenerations=300, mutation_rate=0.05, optimum=100)
+e = Environment(MyIndividual, maxgenerations=300, mutation_rate=0.1, optimum=100)
 
 e.run()
